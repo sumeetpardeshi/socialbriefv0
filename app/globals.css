@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 262 83.3% 57.8%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217 91.2% 59.8%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 12 76.4% 61%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 262 83.3% 57.8%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217 91.2% 59.8%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 12 76.4% 61%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-image: radial-gradient(circle at top right, hsl(var(--primary) / 0.15), transparent 40%),
+      radial-gradient(circle at bottom left, hsl(var(--secondary) / 0.15), transparent 40%);
+    background-attachment: fixed;
+  }
+}
+
+.glass {
+  @apply bg-background/60 backdrop-blur-md border border-border/50;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-card {
+  @apply bg-background/80 backdrop-blur-md border border-border/50 shadow-xl;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Improve light mode styling */
+.light .glass {
+  @apply border-gray-200/50;
+}
+
+.light .glass-card {
+  @apply border-gray-200/50;
+}
+
+/* Improve dark mode styling */
+.dark .glass {
+  @apply border-white/10;
+}
+
+.dark .glass-card {
+  @apply border-white/10;
+}
